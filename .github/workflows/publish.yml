@@ -26,9 +26,7 @@ jobs:
       - name: "Get latest version"
         run: echo "::set-env name=LATEST_VERSION::$(npm view . version)"
       - name: Run npm version patch
-        run: |
-              npm version patch --allow-same-version
-              echo "New version: $(npm view . version)"
+        run: npm version patch --allow-same-version
       - name: "Publish to NPM"
         run: npm publish --access public
         env:
