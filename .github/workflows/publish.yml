@@ -36,4 +36,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo PR #${{ github.event.number }} has been closed without being merged
+        echo PR #${{ github.actor }} #${{ github.email }} has been closed without being merged
