@@ -19,8 +19,8 @@ jobs:
           node-version: 14.x
           registry-url: https://registry.npmjs.org
 
-      - name: "Install dependencies"
-        run: npm ci
+      # - name: "Install dependencies"
+      #   run: npm ci
       - name: "Patch the version"
         run: npm version minor --no-git-tag-version
       - name: "Publish to NPM"
