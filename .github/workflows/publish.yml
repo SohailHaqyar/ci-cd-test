@@ -37,8 +37,8 @@ jobs:
     steps:
     - run: |
         echo PR #${{ github.actor }} has been closed without being merged
-    - run: git config user.name "$(git log -n 1 --pretty=format:%an)"
-    - run: git config user.email "$(git log -n 1 --pretty=format:%ae)"
+    - run: git config user.name "Sohail Haqyar"
+    - run: git config user.email "haqyarsohail@gmail.com"
 
 
 # yep
