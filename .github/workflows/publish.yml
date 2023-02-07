@@ -1,23 +1,44 @@
 name: "Publish"
 
-on: 
-  push:
-   branches: 
-    - master
-
+# only trigger on pull request closed events
+on:
+  pull_request:
+    types: [ closed ]
 
 jobs:
-  publish:
+  merge_job:
+    # this job will only run if the PR has been merged
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: "Setup Node"
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-          registry-url: https://registry.npmjs.org
-      - name: "Publish to NPM"
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - run: |
+        echo PR #${{ github.event.number }} has been merged
+
+  close_job:
+    # this job will only run if the PR has been closed without being merged
+    if: github.event.pull_request.merged == false
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo PR #${{ github.event.number }} has been closed without being merged
+
+# on: 
+#   pull_request:
+#     types: [closed]
+
+
+# jobs:
+#   publish:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: "Setup Node"
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: 14.x
+#           registry-url: https://registry.npmjs.org
+#       - name: "Publish to NPM"
+#         run: npm publish --access public
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
